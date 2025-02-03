@@ -6,11 +6,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ShoppingCart } from "lucide-react";
 import { useState, useEffect } from "react";
+import FullNavbar from "./fullNavigation";
+import { AnimatePresence } from "framer-motion";
 
 export default function Navigation() {
   const pathname = usePathname();
   const [cartCount] = useState(5);
   const [showLeftButton, setShowLeftButton] = useState(false);
+  const [isFullNavOpen,setIsFullNavOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,11 +30,9 @@ export default function Navigation() {
 
   return (
     <>
-      {/* Navbar */}
       <div className="bg-transparent z-[21] absolute w-full">
         <nav className="bg-transparent flex items-center justify-between px-10 py-4">
           <div className="flex items-center relative">
-            {/* Animasi Transisi Pergantian Logo dan Tombol */}
             <div className="relative w-[100px] h-[50px]">
               <Image
                 src="/logo.png"
@@ -45,12 +46,15 @@ export default function Navigation() {
               />
               <div
                 className={`absolute w-full h-full flex items-center justify-center transition-opacity duration-300 ${
-                  showLeftButton ? "opacity-100" : "opacity-0"
+                  showLeftButton ? "opacity-100" : "opacity-0 -z-10"
                 }`}
               >
-                <div className="fixed top-8 left-8 bg-gray-800 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-700">
-                  Fitur Baru
-                </div>
+                <button 
+                  onClick={() => setIsFullNavOpen(true)}
+                  className="fixed top-8 left-8 text-white px-4 py-2 cursor-pointer hover:text-gray-300 text-lg border-b-2"
+                >
+                  Navigation
+                </button>
               </div>
             </div>
           </div>
@@ -91,8 +95,11 @@ export default function Navigation() {
             </span>
           )}
         </Link>
-        <Link href="/login" className="hover:text-gray-300 text-lg">Login</Link>
+        <Link href="/login" className="hover:text-gray-300 text-lg border-b-2 pb-2">Login</Link>
       </div>
+      <AnimatePresence>
+        {isFullNavOpen && <FullNavbar isOpen={isFullNavOpen} onClose={() => setIsFullNavOpen(false)} />}
+      </AnimatePresence>
     </>
   );
 }
