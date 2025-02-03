@@ -13,7 +13,6 @@ export default function RootLayout({
       <body>
         <Navigation/>
         <ParallaxDemo/>
-        {/* {children} */}
         <Text/>
         <Footer />
       </body>

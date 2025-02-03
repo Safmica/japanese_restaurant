@@ -1,71 +1,98 @@
+"use client";
+
 import "../globals.css";
+import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ShoppingCart } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export default function Navigation() {
-    return (
-        <div className="bg-background text-foreground">
-        <nav className="flex flex-wrap place-items-center top-0">
-          <section className="relative mx-auto">
-            <nav className="flex justify-between bg-gray-900 text-white w-screen">
-              <div className="px-5 xl:px-12 py-6 flex w-full items-center">
-                <Link className="text-3xl font-bold font-heading" href="#">
-                  Logo Here.
-                </Link>
-                <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
-                  <li><Link className="hover:text-gray-200" href="#">Home</Link></li>
-                  <li><Link className="hover:text-gray-200" href="#">Catagory</Link></li>
-                  <li><Link className="hover:text-gray-200" href="#">Collections</Link></li>
-                  <li><Link className="hover:text-gray-200" href="#">Contact Us</Link></li>
-                </ul>
-                <div className="hidden xl:flex space-x-5 items-center">
-                  <Link className="hover:text-gray-200" href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
-                  </Link>
-                  <Link className="flex items-center hover:text-gray-200" href="#">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                      </svg>
-                    <span className="flex absolute -mt-5 ml-4">
-                      <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-3 w-3 bg-pink-500">
-                        </span>
-                      </span>
-                  </Link>
-                  <Link className="flex items-center hover:text-gray-200" href="#">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                  </Link>
-                  
+  const pathname = usePathname();
+  const [cartCount] = useState(5);
+  const [showLeftButton, setShowLeftButton] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setShowLeftButton(true);
+      } else {
+        setShowLeftButton(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <>
+      {/* Navbar */}
+      <div className="bg-transparent z-[21] absolute w-full">
+        <nav className="bg-transparent flex items-center justify-between px-10 py-4">
+          <div className="flex items-center relative">
+            {/* Animasi Transisi Pergantian Logo dan Tombol */}
+            <div className="relative w-[100px] h-[50px]">
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                width={80}
+                height={80}
+                priority
+                className={`absolute transition-opacity duration-300 ${
+                  showLeftButton ? "opacity-0" : "opacity-100"
+                }`}
+              />
+              <div
+                className={`absolute w-full h-full flex items-center justify-center transition-opacity duration-300 ${
+                  showLeftButton ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <div className="fixed top-8 left-8 bg-gray-800 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-700">
+                  Fitur Baru
                 </div>
               </div>
-              <Link className="xl:hidden flex mr-6 items-center" href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-                <span className="flex absolute -mt-5 ml-4">
-                  <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-pink-500">
-                  </span>
-                </span>
-              </Link>
-              <Link className="navbar-burger self-center mr-12 xl:hidden" href="#">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
-              </Link>
-            </nav>
-            
-          </section>
-        </nav>
-        <div className="absolute bottom-0 right-0 mb-4 mr-4 z-10">
-            <div>
-                <Link title="Follow me on twitter" href="https://www.twitter.com/asad_codes" target="_blank" className="block w-16 h-16 rounded-full transition-all shadow hover:shadow-lg transform hover:scale-110 hover:rotate-12">
-                </Link>
             </div>
-        </div>
+          </div>
+
+          <div>
+            <ul className="flex space-x-8 text-sm font-medium text-white border-b-2 py-4">
+              {["/", "/about", "/menu", "/offers", "/reservation"].map(
+                (route) => (
+                  <li key={route}>
+                    <Link
+                      href={route}
+                      className={`${
+                        pathname === route
+                          ? "py-4 border-b-4 border-white text-gray-300 font-bold"
+                          : "border-transparent hover:text-gray-300"
+                      }`}
+                    >
+                      {route === "/"
+                        ? "Home"
+                        : route.replace("/", "").charAt(0).toUpperCase() +
+                          route.slice(2)}
+                    </Link>
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
+          <div className="pl-10"></div>
+        </nav>
       </div>
-    )
+
+      <div className="fixed top-8 right-8 flex space-x-4 items-center z-30 text-white">
+        <Link href="/cart" className="relative">
+          <ShoppingCart className="w-8 h-8 hover:text-gray-300" />
+          {cartCount > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              {cartCount}
+            </span>
+          )}
+        </Link>
+        <Link href="/login" className="hover:text-gray-300 text-lg">Login</Link>
+      </div>
+    </>
+  );
 }
