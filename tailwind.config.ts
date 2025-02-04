@@ -18,6 +18,7 @@ export default {
       fontFamily: {
         toragon: ["Toragon", "sans-serif"],
         jansina: ["Jansina", "sans-serif"],
+        olivera: ["Olivera", "sans-serif"],
       },
     },
   },

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { ShoppingCart } from "lucide-react";
 import { useState, useEffect } from "react";
 import FullNavbar from "./fullNavigation";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Navigation() {
   const pathname = usePathname();
@@ -29,7 +29,7 @@ export default function Navigation() {
 
   return (
     <>
-      <div className="bg-transparent z-[21] absolute w-full">
+      <div className="bg-transparent z-[21] absolute w-full font-serif">
         <nav className="bg-transparent flex items-center justify-between px-10 py-4">
           <div className="flex items-center relative">
             <div className="relative w-[100px] h-[50px]">
@@ -44,7 +44,7 @@ export default function Navigation() {
                 }`}
               />
               <div
-                className={`absolute w-full h-full flex items-center justify-center transition-opacity duration-300 ${
+                className={`absolute w-full h-full flex items-center justify-center transition-opacity duration-500 ${
                   showLeftButton ? "opacity-100" : "opacity-0 -z-10"
                 }`}
               >
@@ -58,27 +58,27 @@ export default function Navigation() {
             </div>
           </div>
 
-          <div>
-            <ul className="flex space-x-8 text-sm font-medium text-white border-b-2 py-4">
-              {["/", "/about", "/menu", "/offers", "/reservation"].map(
-                (route) => (
-                  <li key={route}>
-                    <Link
-                      href={route}
-                      className={`${
-                        pathname === route
-                          ? "py-4 border-b-4 border-white text-gray-300 font-bold"
-                          : "border-transparent hover:text-gray-300"
-                      }`}
-                    >
-                      {route === "/"
-                        ? "Home"
-                        : route.replace("/", "").charAt(0).toUpperCase() +
-                          route.slice(2)}
-                    </Link>
-                  </li>
-                )
-              )}
+          <div className="pr-[50px]">
+            <ul className="flex space-x-8 text-sm text-white border-b-2 py-4">
+              {["/", "/about", "/menu", "/offers", "/reservation"].map((route) => (
+                <li key={route} className="relative">
+                  <Link href={route} className="hover:text-gray-300 relative">
+                    {route === "/"
+                      ? "Home"
+                      : route.replace("/", "").charAt(0).toUpperCase() +
+                        route.slice(2)}
+                    {pathname === route && (
+                      <motion.div
+                        key={pathname}
+                        initial={{ scaleX: 0, originX: 0.5 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="absolute -bottom-5 left-0 w-full h-[4px] bg-white"
+                      />
+                    )}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div className="pl-10"></div>
@@ -94,7 +94,7 @@ export default function Navigation() {
             </span>
           )}
         </Link>
-        <Link href="/login" className="hover:text-gray-300 text-lg border-b-2 pb-2">Login</Link>
+        <Link href="/login" className="hover:text-gray-300 text-2xl border-b-2 pb-2 font-olivera">Login</Link>
       </div>
       <AnimatePresence>
         {isFullNavOpen && <FullNavbar isOpen={isFullNavOpen} onClose={() => setIsFullNavOpen(false)} />}

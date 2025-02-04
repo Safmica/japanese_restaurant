@@ -57,7 +57,7 @@ export default function Home() {
         className="fixed left-[25%] z-10 flex flex-col items-center justify-center min-h-screen w-1/2"
       >
         <h1 className="text-9xl text-white font-toragon text-center">
-          Kaisei
+          Kaiseii
         </h1>
         <h1 className="text-4xl text-white font-jansina text-center">
           Japanese Restaurant
