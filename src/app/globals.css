@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'Toragon';
+    src: url('/fonts/ToragonDemo.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}  
+
+@font-face {
+    font-family: 'Jansina';
+    src: url('/fonts/Jansina.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}  

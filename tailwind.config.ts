@@ -15,6 +15,10 @@ export default {
       backdropBlur: {
         sm: '4px',
       },
+      fontFamily: {
+        toragon: ["Toragon", "sans-serif"],
+        jansina: ["Jansina", "sans-serif"],
+      },
     },
   },
   plugins: [],
