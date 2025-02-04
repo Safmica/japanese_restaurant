@@ -1,7 +1,6 @@
 import "./globals.css";
 import Navigation from "../components/navigation";
 import Footer from "../components/footer";
-import Text from "../components/text"
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -12,7 +11,6 @@ export default function RootLayout({
       <body>
         <Navigation/>
         {children}
-        <Text/>
         <Footer />
       </body>
     </html>
