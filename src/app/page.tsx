@@ -3,10 +3,21 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion, useTransform, useMotionValue, useSpring } from "framer-motion";
 import Image from "next/image";
+import gsap from "gsap";
+
 
 export default function Home() {
   const ref = useRef<HTMLDivElement>(null);
+  const textRef = useRef(null);
   const [screenSize, setScreenSize] = useState({ width: 1920, height: 1080 });
+
+  useEffect(() => {
+    gsap.fromTo(
+      textRef.current,
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+    );
+  }, []);
 
   useEffect(() => {
     setScreenSize({ width: window.outerWidth, height: window.outerHeight });
@@ -40,6 +51,12 @@ export default function Home() {
       <motion.div 
         style={{ y: backgroundY1 }} 
         className="fixed top-0 left-0 w-full"
+        initial={{ scale: 1.2, opacity: 1 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{
+          duration: 6, 
+          ease: "easeOut", 
+        }}
       >
         <Image
           src="/images/homeBackground.png"
@@ -53,15 +70,49 @@ export default function Home() {
       </motion.div>
 
       <motion.div 
+        ref={textRef}
         style={{ y: textY1 }} 
-        className="fixed left-[25%] z-10 flex flex-col items-center justify-center min-h-screen w-1/2"
-      >
-        <h1 className="text-9xl text-white font-toragon text-center">
+        className="fixed left-[25%] z-10 flex flex-col items-center justify-center min-h-screen w-1/2">
+        <motion.h1 
+          initial={{ x: "-20%", opacity: 0 }}
+          animate={{ x: 0, opacity: 1, rotate: [-5, 3, -2, 1, 0] }}
+          transition={{
+            duration: 1,
+            type: "spring",
+            stiffness: 120,
+            damping: 10,
+            rotate: {
+              duration: 1.2,
+              ease: "easeInOut",
+              repeat: 0,
+              repeatType: "reverse",
+            },
+          }}
+          className="text-9xl text-white font-toragon text-center"
+        >
           Kaisei
-        </h1>
-        <h1 className="text-4xl text-white font-jansina text-center">
+        </motion.h1>
+
+        <motion.h1 
+          initial={{ x: "20%", opacity: 0 }}
+          animate={{ x: 0, opacity: 1, rotate: [5, -3, 2, -1, 0] }}
+          transition={{
+            duration: 1,
+            type: "spring",
+            stiffness: 120,
+            damping: 10,
+            delay: 0.3,
+            rotate: {
+              duration: 1.2,
+              ease: "easeInOut",
+              repeat: 0,
+              repeatType: "reverse",
+            },
+          }}
+          className="text-4xl text-white font-jansina text-center"
+        >
           Japanese Restaurant
-        </h1>
+        </motion.h1>
       </motion.div>
 
       <motion.div 
