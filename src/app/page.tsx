@@ -40,11 +40,11 @@ export default function Home() {
 
   const smoothScrollY = useSpring(scrollY, { stiffness: 100, damping: 20 });
 
-  const backgroundY1 = useTransform(smoothScrollY, [0, screenSize.height], ["0%", "-50%"]);
-  const backgroundY2 = useTransform(smoothScrollY, [screenSize.height, screenSize.height * 2], ["100%", "0%"]); // Gambar kedua masuk setelah pertama berhenti
+  const backgroundY1 = useTransform(smoothScrollY, [0, screenSize.height * 0.5], ["0%", "-50%"]);
+  const backgroundY2 = useTransform(smoothScrollY, [screenSize.height * 0.5, screenSize.height * 0.7, screenSize.height * 1.4], ["50%", "0%", "-50%"]);
 
-  const textY1 = useTransform(smoothScrollY, [0, screenSize.height * 0.5, screenSize.height], ["0%", "0%", "-130%"]);
-  const textY2 = useTransform(smoothScrollY, [0, screenSize.height * 0.3, screenSize.height * 0.5, screenSize.height], ["100%", "100%", "30%", "-100%"]);
+  const textY1 = useTransform(smoothScrollY, [0, screenSize.height * 0.9, screenSize.height * 1.4], ["0%", "0%", "-130%"]);
+  const textY2 = useTransform(smoothScrollY, [0, screenSize.height * 0.7, screenSize.height * 0.9, screenSize.height * 1.4], ["100%", "100%", "30%", "-100%"]);
 
   return (
     <div ref={ref} className="relative w-full min-h-[600vh] overflow-hidden">
@@ -129,14 +129,13 @@ export default function Home() {
         className="fixed top-0 left-0 w-full"
       >
         <Image
-          src="/images/bg2.jpg"
+          src="/images/home2.png"
           alt="Background 2"
           width={screenSize.width}
           height={screenSize.height}
           style={{ objectFit: "cover", objectPosition: "center" }}
           priority
-          className="transition-opacity duration-300 opacity-100"
-        />
+          className="transition-opacity duration-300 opacity-100 brightness-75"/>
       </motion.div>
     </div>
   );
