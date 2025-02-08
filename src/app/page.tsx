@@ -40,8 +40,8 @@ export default function Home() {
 
   const smoothScrollY = useSpring(scrollY, { stiffness: 100, damping: 20 });
 
-  const backgroundY1 = useTransform(smoothScrollY, [0, screenSize.height * 0.5], ["0%", "-50%"]);
-  const backgroundY2 = useTransform(smoothScrollY, [screenSize.height * 0.5, screenSize.height * 0.7, screenSize.height * 1.4], ["50%", "0%", "-50%"]);
+  const backgroundY1 = useTransform(smoothScrollY, [0, screenSize.height * 0.6], ["0%", "-50%"]);
+  const backgroundY2 = useTransform(smoothScrollY, [screenSize.height * 0.6, screenSize.height * 0.9, screenSize.height * 1.6], ["50%", "-5%", "-50%"]);
 
   const textY1 = useTransform(smoothScrollY, [0, screenSize.height * 0.9, screenSize.height * 1.4], ["0%", "0%", "-130%"]);
   const textY2 = useTransform(smoothScrollY, [0, screenSize.height * 0.7, screenSize.height * 0.9, screenSize.height * 1.4], ["100%", "100%", "30%", "-100%"]);
