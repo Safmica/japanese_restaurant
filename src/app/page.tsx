@@ -54,7 +54,7 @@ export default function Home() {
   const textY2 = useTransform(smoothScrollY, [0, screenSize.height * 0.7, screenSize.height * 0.9, screenSize.height * 1.4], ["100%", "100%", "30%", "-100%"]);
 
   return (
-    <div ref={ref} className="relative w-full min-h-[300vh] overflow-hidden">
+    <div data-nav-section ref={ref} className="relative w-full min-h-[300vh] overflow-hidden">
       <motion.div layout
         style={{
           y: backgroundY1,
@@ -167,13 +167,13 @@ export default function Home() {
           className="transition-opacity duration-300 opacity-100 brightness-85"
         />
       </motion.div>
-      <motion.div
-      style={{
-        y : backgroundY3,
-      }}
-      className="fixed top-0 left-0 w-full h-screen bg-amber-100"
-    />
-
+      <motion.div 
+        data-nav-section
+        style={{
+          y : backgroundY3,
+        }}
+        className="fixed top-0 left-0 w-full h-screen bg-amber-100"
+      />
     </div>
   );
 }
