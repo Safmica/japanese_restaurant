@@ -44,6 +44,12 @@ export default function Home() {
   const backgroundY2 = useTransform(smoothScrollY, [screenSize.height * 0.6, screenSize.height * 0.9, screenSize.height * 1.6], ["50%", "-5%", "-50%"])
   const backgroundY3 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 2], ["100%", "0%"])
 
+  const brightnessBackground2 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 2], [0.85, 0])
+  const filterValue = useTransform(
+    brightnessBackground2,
+    value => `brightness(${value})`
+  );
+
   const textY1 = useTransform(smoothScrollY, [0, screenSize.height * 0.9, screenSize.height * 1.4], ["0%", "0%", "-130%"]);
   const textY2 = useTransform(smoothScrollY, [0, screenSize.height * 0.7, screenSize.height * 0.9, screenSize.height * 1.4], ["100%", "100%", "30%", "-100%"]);
 
@@ -77,8 +83,10 @@ export default function Home() {
 
       <motion.div layout
         ref={textRef}
-        style={{ y: textY1,           transform: "translateZ(0)",
-          willChange: "transform" }} 
+        style={{ y: textY1,           
+          transform: "translateZ(0)",
+          willChange: "transform" 
+        }} 
         className="fixed left-[25%] z-10 flex flex-col items-center justify-center min-h-screen w-1/2">
         <motion.h1 
           initial={{ x: "-20%", opacity: 0 }}
@@ -123,8 +131,10 @@ export default function Home() {
       </motion.div>
 
       <motion.div layout
-        style={{ y: textY2,          transform: "translateZ(0)",
-          willChange: "transform" }} 
+        style={{ y: textY2,          
+          transform: "translateZ(0)",
+          willChange: "transform" 
+        }} 
         className="fixed left-[25%] z-10 flex flex-col items-center justify-center min-h-screen w-1/2"
       >
         <h1 className="text-2xl text-white text-center font-olivera">
@@ -136,8 +146,9 @@ export default function Home() {
         style={{
           y: backgroundY2,
           transform: "translateZ(0)",
-          willChange: "transform"
-        }} 
+          willChange: "transform, filter",
+          filter: filterValue,
+        }}
         className="fixed top-0 left-0 w-full"
       >
         <Image
@@ -153,7 +164,7 @@ export default function Home() {
           }}
           quality={50}
           typeof="webp"
-          className="transition-opacity duration-300 opacity-100 brightness-75"
+          className="transition-opacity duration-300 opacity-100 brightness-85"
         />
       </motion.div>
       <motion.div
