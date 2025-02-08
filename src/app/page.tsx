@@ -38,18 +38,23 @@ export default function Home() {
     return () => window.removeEventListener("scroll", updateScroll);
   }, [scrollY]);
 
-  const smoothScrollY = useSpring(scrollY, { stiffness: 100, damping: 20 });
+  const smoothScrollY = useSpring(scrollY, { stiffness: 100, damping: 20, mass: 0.1 });
 
   const backgroundY1 = useTransform(smoothScrollY, [0, screenSize.height * 0.6], ["0%", "-50%"]);
-  const backgroundY2 = useTransform(smoothScrollY, [screenSize.height * 0.6, screenSize.height * 0.9, screenSize.height * 1.6], ["50%", "-5%", "-50%"]);
+  const backgroundY2 = useTransform(smoothScrollY, [screenSize.height * 0.6, screenSize.height * 0.9, screenSize.height * 1.6], ["50%", "-5%", "-50%"])
+  const backgroundY3 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 2], ["100%", "0%"])
 
   const textY1 = useTransform(smoothScrollY, [0, screenSize.height * 0.9, screenSize.height * 1.4], ["0%", "0%", "-130%"]);
   const textY2 = useTransform(smoothScrollY, [0, screenSize.height * 0.7, screenSize.height * 0.9, screenSize.height * 1.4], ["100%", "100%", "30%", "-100%"]);
 
   return (
-    <div ref={ref} className="relative w-full min-h-[600vh] overflow-hidden">
-      <motion.div 
-        style={{ y: backgroundY1 }} 
+    <div ref={ref} className="relative w-full min-h-[300vh] overflow-hidden">
+      <motion.div layout
+        style={{
+          y: backgroundY1,
+          transform: "translateZ(0)",
+          willChange: "transform"
+        }} 
         className="fixed top-0 left-0 w-full"
         initial={{ scale: 1.2, opacity: 1 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -64,14 +69,16 @@ export default function Home() {
           width={screenSize.width}
           height={screenSize.height}
           style={{ objectFit: "cover", objectPosition: "center" }}
+          quality={50}
           priority
           className="transition-opacity duration-300 opacity-100 filter brightness-75"
         />
       </motion.div>
 
-      <motion.div 
+      <motion.div layout
         ref={textRef}
-        style={{ y: textY1 }} 
+        style={{ y: textY1,           transform: "translateZ(0)",
+          willChange: "transform" }} 
         className="fixed left-[25%] z-10 flex flex-col items-center justify-center min-h-screen w-1/2">
         <motion.h1 
           initial={{ x: "-20%", opacity: 0 }}
@@ -93,7 +100,7 @@ export default function Home() {
           Kaisei
         </motion.h1>
 
-        <motion.h1 
+        <motion.h1 layout
           initial={{ x: "20%", opacity: 0 }}
           animate={{ x: 0, opacity: 1, rotate: [5, -3, 2, -1, 0] }}
           transition={{
@@ -115,8 +122,9 @@ export default function Home() {
         </motion.h1>
       </motion.div>
 
-      <motion.div 
-        style={{ y: textY2 }} 
+      <motion.div layout
+        style={{ y: textY2,          transform: "translateZ(0)",
+          willChange: "transform" }} 
         className="fixed left-[25%] z-10 flex flex-col items-center justify-center min-h-screen w-1/2"
       >
         <h1 className="text-2xl text-white text-center font-olivera">
@@ -124,8 +132,12 @@ export default function Home() {
         </h1>
       </motion.div>
 
-      <motion.div 
-        style={{ y: backgroundY2 }} 
+      <motion.div layout
+        style={{
+          y: backgroundY2,
+          transform: "translateZ(0)",
+          willChange: "transform"
+        }} 
         className="fixed top-0 left-0 w-full"
       >
         <Image
@@ -133,10 +145,24 @@ export default function Home() {
           alt="Background 2"
           width={screenSize.width}
           height={screenSize.height}
-          style={{ objectFit: "cover", objectPosition: "center" }}
-          priority
-          className="transition-opacity duration-300 opacity-100 brightness-75"/>
+          style={{
+            objectFit: "cover",
+            objectPosition: "center",
+            WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%)",
+            maskImage: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%)"
+          }}
+          quality={50}
+          typeof="webp"
+          className="transition-opacity duration-300 opacity-100 brightness-75"
+        />
       </motion.div>
+      <motion.div
+      style={{
+        y : backgroundY3,
+      }}
+      className="fixed top-0 left-0 w-full h-screen bg-amber-100"
+    />
+
     </div>
   );
 }
