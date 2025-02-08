@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import { motion, useTransform, useMotionValue, useSpring } from "framer-motion";
+import {useInView ,motion, useTransform, useMotionValue, useSpring } from "framer-motion";
 import Image from "next/image";
 import gsap from "gsap";
 
@@ -52,6 +52,13 @@ export default function Home() {
 
   const textY1 = useTransform(smoothScrollY, [0, screenSize.height * 0.9, screenSize.height * 1.4], ["0%", "0%", "-130%"]);
   const textY2 = useTransform(smoothScrollY, [0, screenSize.height * 0.7, screenSize.height * 0.9, screenSize.height * 1.4], ["100%", "100%", "30%", "-100%"]);
+  const textY3 = useTransform(smoothScrollY, [screenSize.height * 1.8, screenSize.height * 2.2], ["100%", "0%"])
+
+  const swipeRef = useRef<HTMLDivElement>(null);
+  const isSwipeInView = useInView(swipeRef, { 
+    once: false,
+    margin: "0px 0px -200px -200px"
+  });
 
   return (
     <div data-nav-section ref={ref} className="relative w-full min-h-[300vh] overflow-hidden">
@@ -171,6 +178,43 @@ export default function Home() {
         data-nav-section
         style={{
           y : backgroundY3,
+        }}
+        className="fixed top-0 left-0 w-full h-screen bg-amber-100"
+      />
+
+      <motion.div
+        ref={swipeRef}
+        style={{ y:textY3 }}
+        className="fixed left-[25%] z-10 flex flex-col items-center justify-center min-h-screen w-1/2"
+      >
+        <div className="relative text-6xl font-bold">
+          <span className="text-white">Welcome to Kaisei</span>
+
+          <motion.span
+            className="absolute top-0 left-0"
+            style={{
+              background: "linear-gradient(to right, black 50%, white 50%)",
+              backgroundSize: "200% 100%",
+              backgroundPosition: "100% 0",
+              WebkitBackgroundClip: "text",
+              color: "transparent",
+            }}
+            initial={{ backgroundPosition: "100% 0" }}
+            animate={{ backgroundPosition: isSwipeInView ? "0% 0" : "100% 0" }}
+            transition={{
+              duration: 1.2,
+              ease: "easeInOut",
+            }}
+          >
+            Welcome to Kaisei
+          </motion.span>
+        </div>
+      </motion.div>
+
+      <motion.div 
+        data-nav-section
+        style={{
+          y: backgroundY3,
         }}
         className="fixed top-0 left-0 w-full h-screen bg-amber-100"
       />
