@@ -42,8 +42,9 @@ export default function Home() {
 
   const backgroundY1 = useTransform(smoothScrollY, [0, screenSize.height * 0.6], ["0%", "-50%"]);
   const backgroundY2 = useTransform(smoothScrollY, [screenSize.height * 0.6, screenSize.height * 0.9, screenSize.height * 1.6], ["50%", "-5%", "-50%"])
-  const backgroundY3 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 2.4], ["100%", "-100%"])
-  const backgroundY4 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 2], ["100%", "0%"])
+  const backgroundY3 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 1.8, screenSize.height * 2], ["100%", "0%", "-100%"])
+  const backgroundY4 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 1.8, screenSize.height * 2], ["100%", "0%", "-100%"])
+  const backgroundY5 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 2, screenSize.height * 3], ["100%", "0%", "-50%"])
 
   const brightnessBackground2 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 2], [0.85, 0])
   const filterValue = useTransform(
@@ -53,7 +54,7 @@ export default function Home() {
 
   const textY1 = useTransform(smoothScrollY, [0, screenSize.height * 0.9, screenSize.height * 1.4], ["0%", "0%", "-130%"]);
   const textY2 = useTransform(smoothScrollY, [0, screenSize.height * 0.7, screenSize.height * 0.9, screenSize.height * 1.4], ["100%", "100%", "30%", "-100%"]);
-  const textY3 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 2], ["100%", "0%"])
+  const textY3 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 1.8, screenSize.height * 2.2], ["100%", "60%", "-140%"])
 
   const swipeRef = useRef<HTMLDivElement>(null);
   const isSwipeInView = useInView(swipeRef, { 
@@ -62,7 +63,7 @@ export default function Home() {
   });
 
   return (
-    <div data-nav-section ref={ref} className="relative w-full min-h-[300vh] overflow-hidden">
+    <div data-nav-section ref={ref} className="relative w-full min-h-[400vh] overflow-hidden">
       <motion.div layout
         style={{
           y: backgroundY1,
@@ -175,13 +176,6 @@ export default function Home() {
           className="transition-opacity duration-300 opacity-100 brightness-85"
         />
       </motion.div>
-      <motion.div 
-        data-nav-section
-        style={{
-          y : backgroundY3,
-        }}
-        className="fixed top-0 left-0 w-full h-screen bg-amber-100"
-      />
 
       <motion.div
         ref={swipeRef}
@@ -189,10 +183,10 @@ export default function Home() {
         className="fixed left-[25%] z-10 flex flex-col items-center justify-center min-h-screen w-1/2"
       >
         <div className="relative text-4xl tracking-wider font-zyukiharu">
-          <span className="text-white">Bringing you the enchanting ambiance of authentic Japan</span>
+          <span className="text-transparent">Bringing you the enchanting ambiance of authentic Japan</span>
 
           <motion.span
-            className="absolute top-0 left-0 "
+            className="absolute top-0 left-[9%] w-full"
             style={{
               background: "linear-gradient(to right, black 50%, white 50%)",
               backgroundSize: "200% 100%",
@@ -221,7 +215,7 @@ export default function Home() {
         className="fixed top-0 left-0 w-full z-50"
       >
         <Image
-          src="/images/japan.jpg"
+          src="/images/japan.png"
           alt="Background 1"
           width={screenSize.width}
           height={screenSize.height}
@@ -234,11 +228,20 @@ export default function Home() {
 
       <motion.div 
         data-nav-section
-        style={{
-          y: backgroundY4,
-        }}
-        className="fixed top-0 left-0 w-full h-screen bg-amber-100"
-      />
+        style={{ y: backgroundY4 }}
+        className="fixed top-0 left-0 w-full h-screen bg-white"
+      >
+
+        <div className="absolute inset-0 bg-[url('/images/japanPattern.png')] bg-repeat bg-center opacity-10"></div>
+      </motion.div>
+      <motion.div 
+        data-nav-section
+        style={{ y: backgroundY5 }}
+        className="fixed top-0 left-0 w-full h-[200vh] bg-white"
+      >
+
+        <div className="absolute inset-0 bg-[url('/images/japanPattern.png')] bg-center opacity-10"></div>
+      </motion.div>
     </div>
   );
 }
