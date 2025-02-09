@@ -46,7 +46,7 @@ export default function Home() {
   const backgroundY4 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 1.8, screenSize.height * 2], ["100%", "0%", "-100%"])
   const backgroundY5 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 2, screenSize.height * 3], ["100%", "0%", "-50%"])
 
-  const brightnessBackground2 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 2], [0.85, 0])
+  const brightnessBackground2 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 1.8], [0.85, 0])
   const filterValue = useTransform(
     brightnessBackground2,
     value => `brightness(${value})`
@@ -64,6 +64,7 @@ export default function Home() {
 
   return (
     <div data-nav-section ref={ref} className="relative w-full min-h-[400vh] overflow-hidden">
+      {/* background1 */}
       <motion.div layout
         style={{
           y: backgroundY1,
@@ -76,8 +77,7 @@ export default function Home() {
         transition={{
           duration: 6, 
           ease: "easeOut", 
-        }}
-      >
+        }}>
         <Image
           src="/images/homeBackground.png"
           alt="Background 1"
@@ -86,10 +86,10 @@ export default function Home() {
           style={{ objectFit: "cover", objectPosition: "center" }}
           quality={50}
           priority
-          className="transition-opacity duration-300 opacity-100 filter brightness-75"
-        />
+          className="transition-opacity duration-300 opacity-100 filter brightness-75"/>
       </motion.div>
 
+      {/* text1 */}
       <motion.div layout
         ref={textRef}
         style={{ y: textY1,           
@@ -112,11 +112,11 @@ export default function Home() {
               repeatType: "reverse",
             },
           }}
-          className="text-9xl text-white font-toragon text-center"
-        >
+          className="text-9xl text-white font-toragon text-center">
           Kaisei
         </motion.h1>
 
+        {/* text2 */}
         <motion.h1 layout
           initial={{ x: "20%", opacity: 0 }}
           animate={{ x: 0, opacity: 1, rotate: [5, -3, 2, -1, 0] }}
@@ -133,24 +133,24 @@ export default function Home() {
               repeatType: "reverse",
             },
           }}
-          className="text-4xl text-white font-zyukiharu text-center"
-        >
+          className="text-4xl text-white font-zyukiharu text-center">
           Japanese Restaurant
         </motion.h1>
       </motion.div>
 
+      {/* text3 */}
       <motion.div layout
         style={{ y: textY2,          
           transform: "translateZ(0)",
           willChange: "transform" 
         }} 
-        className="fixed left-[25%] z-10 flex flex-col items-center justify-center min-h-screen w-1/2"
-      >
+        className="fixed left-[25%] z-10 flex flex-col items-center justify-center min-h-screen w-1/2">
         <h1 className="rounded-xl tracking-wide text-xl text-white text-center font-bankai border-y-2 py-4 border-double">
         Kaisei, where Japan’s essence comes alive, A culinary journey where traditions thrive. With flavors deep and ambiance true, Every dish brings Japan to you. From sushi’s grace to ramen’s embrace, Matcha’s warmth and tempura’s taste. In lantern-lit halls, where echoes stay, Kaisei invites you an escape away.
         </h1>
       </motion.div>
 
+      {/* background2 */}
       <motion.div layout
         style={{
           y: backgroundY2,
@@ -158,8 +158,7 @@ export default function Home() {
           willChange: "transform, filter",
           filter: filterValue,
         }}
-        className="fixed top-0 left-0 w-full"
-      >
+        className="fixed top-0 left-0 w-full">
         <Image
           src="/images/home2.png"
           alt="Background 2"
@@ -177,18 +176,17 @@ export default function Home() {
         />
       </motion.div>
 
+      {/* text4 */}
       <motion.div
         ref={swipeRef}
         style={{ y:textY3 }}
-        className="fixed left-[25%] z-10 flex flex-col items-center justify-center min-h-screen w-1/2"
-      >
-        <div className="relative text-4xl tracking-wider font-zyukiharu">
-          <span className="text-transparent">Bringing you the enchanting ambiance of authentic Japan</span>
-
+        className="fixed left-[28%] z-10 flex flex-col items-center justify-center min-h-screen w-1/2">
+        <div className="relative text-4xl tracking-wider font-zyukiharu border-4 border-red-600 border-double -ml-12">
+          <span className="text-transparent ">Bringing you the enchanting ambiance of authentic Japan</span>
           <motion.span
             className="absolute top-0 left-[9%] w-full"
             style={{
-              background: "linear-gradient(to right, black 50%, white 50%)",
+              background: "linear-gradient(to right, black 50%, transparent 50%)",
               backgroundSize: "200% 100%",
               backgroundPosition: "100% 0",
               WebkitBackgroundClip: "text",
@@ -199,21 +197,20 @@ export default function Home() {
             transition={{
               duration: 1.2,
               ease: "easeInOut",
-            }}
-          >
+            }}>
             Bringing you the enchanting ambiance of authentic Japan
           </motion.span>
         </div>
       </motion.div>
 
+      {/* japan image */}
       <motion.div layout
         style={{
           y: backgroundY3,
           transform: "translateZ(0)",
           willChange: "transform"
         }} 
-        className="fixed top-0 left-0 w-full z-50"
-      >
+        className="fixed top-0 left-0 w-full z-50">
         <Image
           src="/images/japan.png"
           alt="Background 1"
@@ -222,26 +219,38 @@ export default function Home() {
           style={{ objectFit: "cover", objectPosition: "center" }}
           quality={50}
           priority
-          className="transition-opacity duration-300 opacity-100 filter z-50"
-        />
+          className="transition-opacity duration-300 opacity-100 filter z-50"/>
       </motion.div>
 
-      <motion.div 
+      {/* japan pattern 1 */}
+      <motion.div layout
         data-nav-section
-        style={{ y: backgroundY4 }}
-        className="fixed top-0 left-0 w-full h-screen bg-white"
-      >
-
+        style={{ 
+          y: backgroundY4,
+          transform: "translateZ(0)",
+          willChange: "transform"
+        }}
+        className="fixed top-0 left-0 w-full h-screen bg-amber-100">
         <div className="absolute inset-0 bg-[url('/images/japanPattern.png')] bg-repeat bg-center opacity-10"></div>
       </motion.div>
-      <motion.div 
-        data-nav-section
-        style={{ y: backgroundY5 }}
-        className="fixed top-0 left-0 w-full h-[200vh] bg-white"
-      >
 
-        <div className="absolute inset-0 bg-[url('/images/japanPattern.png')] bg-center opacity-10"></div>
+      {/* japan pattern 2 */}
+      <motion.div layout
+        data-nav-section
+        style={{ 
+          y: backgroundY5,
+          transform: "translateZ(0)",
+          willChange: "transform, transition"
+        }}
+        className="fixed top-0 left-0 w-full h-[200vh] bg-amber-100">
+        <motion.div
+          initial={{ scaleX: 0, originX: 0.5 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className="absolute -bottom-5 left-0 w-full h-[4px] bg-white"/>
+          <div className="absolute inset-0 bg-[url('/images/japanPattern.png')] bg-center opacity-10"></div>
       </motion.div>
+
     </div>
   );
 }
