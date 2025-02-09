@@ -22,3 +22,17 @@
     font-weight: normal;
     font-style: normal;
 }  
+
+@font-face {
+    font-family: 'Bankai';
+    src: url('/fonts/Bankai.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}  
+
+@font-face {
+    font-family: 'Zyukiharu';
+    src: url('/fonts/Zyukiharu.ttf') format('truetype'); 
+    font-weight: normal;
+    font-style: normal;
+}  

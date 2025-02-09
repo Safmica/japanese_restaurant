@@ -73,7 +73,7 @@ export default function Navigation() {
 
   return (
     <>
-      <div className="bg-transparent z-[21] absolute w-full font-serif">
+      <div className="bg-transparent z-[21] absolute w-full font-zyukiharu">
         <nav className="bg-transparent flex items-center justify-between px-10 py-4">
           <div className="flex items-center relative">
             <div className="relative w-[100px] h-[50px]">
@@ -133,7 +133,7 @@ export default function Navigation() {
 
       <div 
         ref={rightSectionRef}
-        className={`fixed top-8 right-8 flex space-x-4 items-center z-30 ${
+        className={`fixed top-8 right-8 flex space-x-4 items-center z-30 font-zyukiharu ${
           rightSectionColor === 'black' ? 'text-black hover:text-gray-700 border-black' : 'text-white hover:text-gray-300 border-white'
         }`}
       >
@@ -146,7 +146,7 @@ export default function Navigation() {
             </span>
           )}
         </Link>
-        <Link href="/login" className={`text-2xl border-b-2 pb-2 font-olivera
+        <Link href="/login" className={`text-2xl border-b-2 pb-2 font-zyukiharu
           ${rightSectionColor === 'black' ? 'border-black hover:text-gray-700' : 'border-white hover:text-gray-300'}`}>
           Login
         </Link>

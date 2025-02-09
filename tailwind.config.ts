@@ -19,6 +19,8 @@ export default {
         toragon: ["Toragon", "sans-serif"],
         jansina: ["Jansina", "sans-serif"],
         olivera: ["Olivera", "sans-serif"],
+        bankai: ["Bankai", "sans-serif"],
+        zyukiharu: ["Zyukiharu", "sans-serif"],
       },
     },
   },

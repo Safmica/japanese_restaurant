@@ -42,7 +42,8 @@ export default function Home() {
 
   const backgroundY1 = useTransform(smoothScrollY, [0, screenSize.height * 0.6], ["0%", "-50%"]);
   const backgroundY2 = useTransform(smoothScrollY, [screenSize.height * 0.6, screenSize.height * 0.9, screenSize.height * 1.6], ["50%", "-5%", "-50%"])
-  const backgroundY3 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 2], ["100%", "0%"])
+  const backgroundY3 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 2.4], ["100%", "-100%"])
+  const backgroundY4 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 2], ["100%", "0%"])
 
   const brightnessBackground2 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 2], [0.85, 0])
   const filterValue = useTransform(
@@ -52,7 +53,7 @@ export default function Home() {
 
   const textY1 = useTransform(smoothScrollY, [0, screenSize.height * 0.9, screenSize.height * 1.4], ["0%", "0%", "-130%"]);
   const textY2 = useTransform(smoothScrollY, [0, screenSize.height * 0.7, screenSize.height * 0.9, screenSize.height * 1.4], ["100%", "100%", "30%", "-100%"]);
-  const textY3 = useTransform(smoothScrollY, [screenSize.height * 1.8, screenSize.height * 2.2], ["100%", "0%"])
+  const textY3 = useTransform(smoothScrollY, [screenSize.height * 1.6, screenSize.height * 2], ["100%", "0%"])
 
   const swipeRef = useRef<HTMLDivElement>(null);
   const isSwipeInView = useInView(swipeRef, { 
@@ -131,7 +132,7 @@ export default function Home() {
               repeatType: "reverse",
             },
           }}
-          className="text-4xl text-white font-jansina text-center"
+          className="text-4xl text-white font-zyukiharu text-center"
         >
           Japanese Restaurant
         </motion.h1>
@@ -144,7 +145,7 @@ export default function Home() {
         }} 
         className="fixed left-[25%] z-10 flex flex-col items-center justify-center min-h-screen w-1/2"
       >
-        <h1 className="text-2xl text-white text-center font-olivera">
+        <h1 className="rounded-xl tracking-wide text-xl text-white text-center font-bankai border-y-2 py-4 border-double">
         Kaisei, where Japan’s essence comes alive, A culinary journey where traditions thrive. With flavors deep and ambiance true, Every dish brings Japan to you. From sushi’s grace to ramen’s embrace, Matcha’s warmth and tempura’s taste. In lantern-lit halls, where echoes stay, Kaisei invites you an escape away.
         </h1>
       </motion.div>
@@ -187,11 +188,11 @@ export default function Home() {
         style={{ y:textY3 }}
         className="fixed left-[25%] z-10 flex flex-col items-center justify-center min-h-screen w-1/2"
       >
-        <div className="relative text-6xl font-bold">
-          <span className="text-white">Welcome to Kaisei</span>
+        <div className="relative text-4xl tracking-wider font-zyukiharu">
+          <span className="text-white">Bringing you the enchanting ambiance of authentic Japan</span>
 
           <motion.span
-            className="absolute top-0 left-0"
+            className="absolute top-0 left-0 "
             style={{
               background: "linear-gradient(to right, black 50%, white 50%)",
               backgroundSize: "200% 100%",
@@ -206,15 +207,35 @@ export default function Home() {
               ease: "easeInOut",
             }}
           >
-            Welcome to Kaisei
+            Bringing you the enchanting ambiance of authentic Japan
           </motion.span>
         </div>
+      </motion.div>
+
+      <motion.div layout
+        style={{
+          y: backgroundY3,
+          transform: "translateZ(0)",
+          willChange: "transform"
+        }} 
+        className="fixed top-0 left-0 w-full z-50"
+      >
+        <Image
+          src="/images/japan.jpg"
+          alt="Background 1"
+          width={screenSize.width}
+          height={screenSize.height}
+          style={{ objectFit: "cover", objectPosition: "center" }}
+          quality={50}
+          priority
+          className="transition-opacity duration-300 opacity-100 filter z-50"
+        />
       </motion.div>
 
       <motion.div 
         data-nav-section
         style={{
-          y: backgroundY3,
+          y: backgroundY4,
         }}
         className="fixed top-0 left-0 w-full h-screen bg-amber-100"
       />
